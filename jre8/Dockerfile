@@ -13,4 +13,5 @@ RUN wget -q -O /usr/local/bin/waitforit https://github.com/maxcnunes/waitforit/r
 
 RUN addgroup -S group && adduser -S -G group user
 USER user
+WORKDIR /home/user
 CMD ["/opt/run.sh"]

@@ -16,4 +16,5 @@ ONBUILD COPY target/${JAR_FILE} /opt/service.jar
 
 RUN addgroup -S group && adduser -S -G group user
 USER user
+WORKDIR /home/user
 CMD ["/opt/run.sh"]
