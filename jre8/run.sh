@@ -9,4 +9,4 @@ do
     /usr/local/bin/waitforit -host ${i%:*} -port ${i#*:} -retry $MILLIS_BETWEEN_WAIT_RETRIES -timeout $SECONDS_TO_WAIT -debug
 done
 
-exec /usr/bin/java $JAVA_BUILD_OPTIONS $JAVA_OPTIONS -Dserver.port=$SERVICE_PORT -jar /opt/service.jar
+exec /usr/bin/java $ONBUILD_JAVA_OPTIONS $JAVA_OPTIONS -Dserver.port=$SERVICE_PORT -jar /opt/service.jar
