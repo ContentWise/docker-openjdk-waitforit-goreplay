@@ -1,4 +1,5 @@
-FROM golang AS waitforit
+FROM golang:alpine AS waitforit
+RUN apk add --no-cache git
 RUN go get github.com/ContentWise/waitforit
 
 FROM openjdk:8-jre-alpine
