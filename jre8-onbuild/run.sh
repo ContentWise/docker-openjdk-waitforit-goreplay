@@ -25,4 +25,4 @@ do
     wget -q "http://${i%:*}:${i#*:}/_cluster/health?wait_for_status=${ELASTICSEARCH_WAIT_FOR_STATUS}&timeout=${SECONDS_TO_WAIT}s" -O /dev/null || { echo "[ERROR] Could not wait for elasticsearch" ; exit 1; }
 done
 
-exec /usr/bin/java $ONBUILD_JAVA_OPTIONS $JAVA_OPTIONS -Dserver.port=$SERVICE_PORT -jar /opt/service.jar
+exec /usr/bin/java $ONBUILD_JAVA_OPTIONS $JAVA_OPTIONS -jar /opt/service.jar
