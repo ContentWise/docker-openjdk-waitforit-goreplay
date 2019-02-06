@@ -57,5 +57,4 @@ COPY --from=waitforit /go/bin/waitforit /usr/local/bin/waitforit
 ONBUILD ARG JAR_FILE=service.jar
 ONBUILD COPY target/${JAR_FILE} /opt/service.jar
 
-WORKDIR /home
 CMD ["/opt/run.sh"]
