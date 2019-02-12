@@ -54,4 +54,6 @@ COPY run.sh /opt/
 RUN wget -q -O - https://github.com/buger/goreplay/releases/download/v${GOREPLAY_VERSION}/gor_${GOREPLAY_VERSION}_x64.tar.gz | tar -xz -C /usr/local/bin
 COPY --from=waitforit /go/bin/waitforit /usr/local/bin/waitforit
 
+RUN mkdir -p /opt/cw/imports
+
 CMD ["/opt/run.sh"]
