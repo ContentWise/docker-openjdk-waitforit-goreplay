@@ -50,6 +50,18 @@ do
 
 done
 
+# Dockerize template
+
+if [ -d "/templates" ]; then
+    cd  /templates > /dev/null
+    for filename in $(find . -type f -print); do
+        dockerize -template ${filename}:/opt/ds/conf/${filename}
+    done
+
+    cd - > /dev/null
+fi
+
+
 # Start with gosu
 
 exec /usr/local/bin/gosu $USER_NAME /usr/bin/java $ONBUILD_JAVA_OPTIONS $JAVA_OPTIONS -jar /opt/service.jar

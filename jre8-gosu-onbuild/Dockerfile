@@ -6,6 +6,7 @@ FROM openjdk:8-jre-alpine
 
 ARG GOREPLAY_VERSION=0.16.1
 ARG GOSU_VERSION=1.10
+ARG DOCKERIZE_VERSION=v0.6.1
 
 ONBUILD ARG GIT_BRANCH
 ONBUILD ARG GIT_BUILD_TIME
@@ -46,7 +47,10 @@ RUN apk update && apk add --no-cache --virtual .gosu-deps \
     wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" && \
     gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu && \
     chmod +x /usr/local/bin/gosu && \
-    apk del .gosu-deps
+    apk del .gosu-deps && \
+    wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz && \
+    tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz && \
+    rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 RUN apk add --no-cache shadow
 
