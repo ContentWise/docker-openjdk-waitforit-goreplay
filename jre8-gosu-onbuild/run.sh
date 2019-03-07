@@ -39,6 +39,17 @@ do
     wget -q "http://${i%:*}:${i#*:}/_cluster/health?wait_for_status=${ELASTICSEARCH_WAIT_FOR_STATUS}&timeout=${SECONDS_TO_WAIT}s" -O /dev/null || { echo "[ERROR] Could not wait for elasticsearch" ; exit 1; }
 done
 
+# Dockerize template
+
+if [ -d "/templates" ]; then
+    cd  /templates > /dev/null
+    for filename in *; do
+        dockerize -template ${filename}:/opt/ds/conf/${filename}
+    done
+
+    cd - > /dev/null
+fi
+
 for f in ${FOLDERS_TO_OWN//,/ }
 do
     if [[ -d $f ]]; then
@@ -49,17 +60,6 @@ do
     fi
 
 done
-
-# Dockerize template
-
-if [ -d "/templates" ]; then
-    cd  /templates > /dev/null
-    for filename in $(find . -type f -print); do
-        dockerize -template ${filename}:/opt/ds/conf/${filename}
-    done
-
-    cd - > /dev/null
-fi
 
 
 # Start with gosu
