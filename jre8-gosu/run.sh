@@ -44,7 +44,7 @@ done
 if [ -d "/templates" ]; then
     cd  /templates > /dev/null
     for filename in *; do
-        dockerize -template ${filename}:/opt/ds/conf/${filename}
+        dockerize -template ${filename}:${INSTALLATION_FOLDER}/conf/${filename}
     done
 
     cd - > /dev/null
